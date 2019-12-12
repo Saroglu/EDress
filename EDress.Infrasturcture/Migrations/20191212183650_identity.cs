@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EDress.Web.Data.Migrations
+namespace EDress.Infrasturcture.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class identity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

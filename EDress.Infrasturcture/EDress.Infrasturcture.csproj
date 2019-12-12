@@ -5,7 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20191212183514_identity.cs" />
+    <Compile Remove="Migrations\20191212183514_identity.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EDress.ApplicationCore\EDress.ApplicationCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.2.0" />
   </ItemGroup>
 
 </Project>
