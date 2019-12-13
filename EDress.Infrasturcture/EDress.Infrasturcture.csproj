@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20191212183514_identity.cs" />
-    <Compile Remove="Migrations\20191212183514_identity.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EDress.ApplicationCore\EDress.ApplicationCore.csproj" />
   </ItemGroup>
 

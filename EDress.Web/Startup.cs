@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using EDress.Infrasturcture.Data;
 using EDress.ApplicationCore.Entities;
+using EDress.ApplicationCore.Interfaces;
+using EDress.ApplicationCore.Services;
 
 namespace EDress.Web
 {
@@ -39,10 +41,13 @@ namespace EDress.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

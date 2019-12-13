@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace EDress.Infrasturcture.Data
@@ -13,5 +14,14 @@ namespace EDress.Infrasturcture.Data
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
+
+        public DbSet<Category> Categories { get; set; }
     }
 }

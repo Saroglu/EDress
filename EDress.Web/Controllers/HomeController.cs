@@ -5,14 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using EDress.Web.Models;
+using EDress.ApplicationCore.Interfaces;
 
 namespace EDress.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index([FromServices] ICategoryService categoryService)
         {
-            return View();
+            return View(categoryService.ListCategories());
         }
 
         public IActionResult Privacy()
