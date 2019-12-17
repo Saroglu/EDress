@@ -6,14 +6,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using EDress.Web.Models;
 using EDress.ApplicationCore.Interfaces;
+using EDress.Web.Interfaces;
 
 namespace EDress.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index([FromServices] ICategoryService categoryService)
+        private readonly IHomeIndexViewModelService _homeIndexViewModelService;
+        public HomeController(IHomeIndexViewModelService homeIndexViewModelService)
         {
-            return View(categoryService.ListCategories());
+            _homeIndexViewModelService = homeIndexViewModelService;
+        }
+        public IActionResult Index()
+        {
+            return View(_homeIndexViewModelService.GetHomeIndexViewModel());
         }
 
         public IActionResult Privacy()

@@ -85,6 +85,34 @@ namespace EDress.Infrasturcture.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("EDress.ApplicationCore.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("ImagePath")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -193,6 +221,14 @@ namespace EDress.Infrasturcture.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("EDress.ApplicationCore.Entities.Product", b =>
+                {
+                    b.HasOne("EDress.ApplicationCore.Entities.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

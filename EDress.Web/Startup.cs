@@ -16,6 +16,8 @@ using EDress.Infrasturcture.Data;
 using EDress.ApplicationCore.Entities;
 using EDress.ApplicationCore.Interfaces;
 using EDress.ApplicationCore.Services;
+using EDress.Web.Services;
+using EDress.Web.Interfaces;
 
 namespace EDress.Web
 {
@@ -47,6 +49,7 @@ namespace EDress.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped<IHomeIndexViewModelService, HomeIndexViewModelService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
