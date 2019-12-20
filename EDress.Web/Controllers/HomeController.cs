@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using EDress.Web.Models;
 using EDress.ApplicationCore.Interfaces;
 using EDress.Web.Interfaces;
+using Microsoft.AspNetCore.Http;
+using EDress.Web.Extensions;
 
 namespace EDress.Web.Controllers
 {
@@ -15,15 +17,22 @@ namespace EDress.Web.Controllers
         private readonly IHomeIndexViewModelService _homeIndexViewModelService;
         public HomeController(IHomeIndexViewModelService homeIndexViewModelService)
         {
+            //Microsoft.AspNetCore.Session
             _homeIndexViewModelService = homeIndexViewModelService;
         }
+
         public IActionResult Index(int? cid, int? p)
         {
-            return View(_homeIndexViewModelService.GetHomeIndexViewModel(cid, p ?? 1, 12));
+            List<string> adlar = new List<string> { "ali", "veli" };
+
+            HttpContext.Session.Set("adlar", adlar);
+            return View(_homeIndexViewModelService.GetHomeIndexViewModel(cid, p ?? 1, Constants.ITEMS_PER_PAGE));
         }
 
         public IActionResult Privacy()
         {
+            ViewBag.ad = HttpContext.Session.GetString("adlar");
+            List<string> isimler = HttpContext.Session.Get<List<string>>("adlar");
             return View();
         }
 
