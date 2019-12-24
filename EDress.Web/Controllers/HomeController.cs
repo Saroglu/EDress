@@ -8,9 +8,8 @@ using EDress.Web.Models;
 using EDress.ApplicationCore.Interfaces;
 using EDress.Web.Interfaces;
 using Microsoft.AspNetCore.Http;
-using EDress.Web.Extensions;
-
 namespace EDress.Web.Controllers
+
 {
     public class HomeController : Controller
     {
@@ -23,16 +22,14 @@ namespace EDress.Web.Controllers
 
         public IActionResult Index(int? cid, int? p)
         {
-            List<string> adlar = new List<string> { "ali", "veli" };
-
-            HttpContext.Session.Set("adlar", adlar);
             return View(_homeIndexViewModelService.GetHomeIndexViewModel(cid, p ?? 1, Constants.ITEMS_PER_PAGE));
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy([FromServices] IBasketService basketService)
         {
-            ViewBag.ad = HttpContext.Session.GetString("adlar");
-            List<string> isimler = HttpContext.Session.Get<List<string>>("adlar");
+            basketService.AddItemToBasket(1, "Kola", 3.5m, "", 3);
+            ViewBag.items = basketService.BasketItems;
+            string value = HttpContext.Session.GetString("basket");
             return View();
         }
 

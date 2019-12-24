@@ -18,6 +18,7 @@ using EDress.ApplicationCore.Interfaces;
 using EDress.ApplicationCore.Services;
 using EDress.Web.Services;
 using EDress.Web.Interfaces;
+using EDress.Infrasturcture.Services;
 
 namespace EDress.Web
 {
@@ -49,6 +50,9 @@ namespace EDress.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddHttpContextAccessor();
+            services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<IBasketViewModelService, BasketViewModelService>();
             services.AddScoped<IHomeIndexViewModelService, HomeIndexViewModelService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddSession(options =>

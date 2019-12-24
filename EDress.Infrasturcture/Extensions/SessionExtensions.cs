@@ -2,10 +2,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace EDress.Web.Extensions
+namespace EDress.Infrasturcture.Extensions
 {
     public static class SessionExtensions
     {
@@ -23,5 +22,3 @@ namespace EDress.Web.Extensions
         }
     }
 }
-
-
