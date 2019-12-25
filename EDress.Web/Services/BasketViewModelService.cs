@@ -36,6 +36,11 @@ namespace EDress.Web.Services
             return vm;
         }
 
+        public void RemoveItemFromBasket(int productId)
+        {
+            _basketService.RemoveItemFromBasket(productId);
+        }
+
         public int TotalItems()
         {
             return _basketService.GetBasketItemCount();

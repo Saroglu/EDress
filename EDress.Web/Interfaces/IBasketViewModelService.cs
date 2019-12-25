@@ -15,5 +15,7 @@ namespace EDress.Web.Interfaces
         int TotalItems();
 
         HeaderCartViewModel GetHeaderCartViewModel();
+
+        void RemoveItemFromBasket(int productId);
     }
 }
